@@ -1,7 +1,5 @@
-require 'pry'
-
 class Owner
-  attr_accessor :name
+  attr_accessor :name, :pets
   attr_reader :species
 
   @@all = []
@@ -33,36 +31,36 @@ class Owner
   end
 
   def buy_fish(fish)
-    new_fish = Fish.new(fish)
-    self.pets[:fishes] << new_fish
+    pets[:fishes] << Fish.new(fish)
   end
 
   def buy_cat(cat)
-    new_cat = Cat.new(cat)
-    self.pets[:cats] << new_cat
+    pets[:cats] << Cat.new(cat)
   end
 
   def buy_dog(dog)
-    new_dog = Dog.new(dog)
-    self.pets[:dogs] << new_dog
+    pets[:dogs] << Dog.new(dog)
   end
 
   def walk_dogs
-    self.pets[:dogs].each {|d| d.mood = "happy"}
+    pets[:dogs].each {|d| d.mood = "happy"}
   end
 
   def play_with_cats
-    self.pets[:cats].each {|c| c.mood = "happy"}
+    pets[:cats].each {|c| c.mood = "happy"}
   end
 
   def feed_fish
-    self.pets[:fishes].each {|f| f.mood = "happy"}
+    pets[:fishes].each {|f| f.mood = "happy"}
   end
 
   def sell_pets
-    self.pets[:dogs].each {|d| d.mood = "nervous"}
-    self.pets[:cats].each {|c| c.mood = "nervous"}
-    self.pets[:fishes].each {|f| f.mood = "nervous"}
+    pets.each do |p, a|
+      a.each do |d|
+        d.mood = "nervous"
+      end
+    end
+    pets.clear
   end
 
   def list_pets
