@@ -56,7 +56,14 @@ class Owner
   end 
   
   def sell_pets
-    binding.pry
-    @pets.collect {|key, value| [key][value] = "happy"} 
+    @pets.each {|key, value|
+      value.each do |pet| pet.mood = "nervous"
+    end 
+    value.clear
+    } 
+  end 
+  
+  def list_pets
+    "I have #{@pets[:fishes].count} fish, #{@pets[:dogs].count} dog(s), and #{@pets[:cats].count} cat(s)."
   end 
 end
