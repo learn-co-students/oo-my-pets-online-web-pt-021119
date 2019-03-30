@@ -1,14 +1,16 @@
 class Owner
+
   attr_reader :species  #can't change its species, can ONLY read NOT write
-  attr_accessor :owner, :fish, :cat, :dog, :name
+  attr_accessor :fish, :cat, :dog, :name, :pets
 
   @@all = []   #Stores all [instance of Owner] that have been created
-  @@pets = {:fishes => [], :dogs => [], :cats => []}  #Stores all of the owner's pets
+
 
   def initialize(species) #Automatically executes the code in the method body
     @species = species  #Requires Owner to define the pets' species
     @name = name  #Requires Owner to define the pet's name
     @@all << self #Adds new instance of Owner to the collection @@all = []
+    @pets = {:fishes => [], :dogs => [], :cats => []}  #Stores all of the owner's pets
   end
 
   def self.all #Class Method
@@ -27,12 +29,30 @@ class Owner
     "I am a #{species}."
   end
 
-  def name
-    @name
+  def pets
+    @pets
   end
 
-  def pets
-    @@pets #stores
+  def buy_fish(fish_name)
+    pets[:fishes] << Fish.new(fish_name)
+  end
+
+  def buy_cat(cat_name)
+    pets[:cats] << Cat.new(cat_name)
+  end
+
+  def buy_dog(dog_name)
+    pets[:dogs] << Dog.new(dog_name)
+  end
+
+  def walk_dogs
+    pets[:dogs].each { |dog| dog.mood = "happy" }
+  end
+
+  #keeping going here
+
+  def list_pets
+    "I have #{pets[:fishes].length} fish, #{pets[:dogs].length} dog(s), and #{pets[:cats].length} cat(s)."
   end
 
 end
