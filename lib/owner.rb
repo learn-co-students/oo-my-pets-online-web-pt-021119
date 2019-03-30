@@ -49,10 +49,25 @@ class Owner
     pets[:dogs].each { |dog| dog.mood = "happy" }
   end
 
-  #keeping going here
+  def play_with_cats
+    pets[:cats].each { |cat| cat.mood = "happy"}
+  end
+
+  def feed_fish
+    pets[:fishes].each { |fish| fish.mood = "happy"}
+  end
 
   def list_pets
     "I have #{pets[:fishes].length} fish, #{pets[:dogs].length} dog(s), and #{pets[:cats].length} cat(s)."
+  end
+
+  def sell_pets
+    pets.each do |pet, owners_pets|       #pets.clear.each { |pet| pet.mood = "nervous"}
+      owners_pets.collect do |pet|
+        pet.mood = "nervous"
+      end
+      owners_pets.clear
+    end
   end
 
 end
